@@ -40,6 +40,7 @@ const typeDefs = `
     type Query {
         allBusinesses: [Business!]!
         allUsers: [User!]!
+        nearbyBusinesses(lat: Float!, long: Float!, distance: Float!): [Business!]!
     }
     #-----mutations-----
     type Mutation {

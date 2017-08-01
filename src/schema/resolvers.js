@@ -9,6 +9,21 @@ module.exports = {
         },
         allUsers: async (root, data, { mongo: { Users } }) => {
             return await Users.find({}).toArray();
+        },
+        nearbyBusinesses: async (root, {lat, long, distance}, { mongo: {Businesses} }) => {
+            const type        = 'Point';
+            const coordinates = [lat, long];
+
+            const response = await Businesses.find({
+                location : {
+                    $near : {
+                        $geometry    : { type, coordinates },
+                        $maxDistance : distance
+                    }
+                }
+            });
+            
+            return response.toArray();
         }
     },
     Mutation: {
@@ -39,7 +54,7 @@ module.exports = {
         createBusiness: async (root, data, { mongo: { Businesses }, user}) => {
             const newBusiness = {
                 name: data.name,
-                coordinates: data.coordinates,
+                location: { type: 'Point', coordinates: data.coordinates.split(',').map(parseFloat)},
                 rating: 0,
                 createdById: user._id
             };
@@ -64,6 +79,9 @@ module.exports = {
             const response    = await BusinessProducts.find({businessId: _id}).toArray();
             const productsIds = response.map((p) => p.productId);            
             return await Products.find({_id: {$in: productsIds}}).toArray();
+        },
+        coordinates: ({location}) => {
+            return location.coordinates.join(',');
         }
     },
     BusinessProduct: {

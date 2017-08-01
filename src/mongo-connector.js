@@ -4,8 +4,9 @@ const config          = require('./config');
 module.exports = async () => {
     const db = await MongoClient.connect(config.database);
 
-    db.collection('products').createIndex({name: 1}, {unique: true})
-    
+    db.collection('products').createIndex({name: 1}, {unique: true});
+    db.collection('businesses').createIndex({ location : '2dsphere' });
+        
     return {        
         Businesses       : db.collection('businesses'),
         BusinessProducts : db.collection('business_products'),
