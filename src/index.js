@@ -39,7 +39,7 @@ const start = async () => {
 
     app.use(morgan('dev'));
 
-    const PORT = 3000;
+    const PORT = process.env.PORT || 3000;
 
     app.listen(PORT, () => {
         console.log(`I'm hungry 😋 🍔  backend server started on port ${PORT}`);
