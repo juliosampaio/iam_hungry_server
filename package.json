@@ -4,6 +4,9 @@
   "description": "Find food on the streets",
   "main": "index.js",
   "author": "Julio Sampaio <juliodssampaio@gmail.com>",
+  "engines": {
+    "node" : ">= 8.4.0"
+  },
   "scripts": {
     "dev": "nodemon ./src/index.js",
     "prod": "node ./src/index.js"
