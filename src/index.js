@@ -34,7 +34,7 @@ const start = async () => {
 
     app.use('/graphiql', graphiqlExpress({
         endpointURL: '/graphql',
-        passHeader : `'Authorization': 'bearer token-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OTc0YmEzNDY3MDUyNTE0ZDA4MjU4YmUiLCJuYW1lIjoiTWFyZ2UgU2ltcHNvbiIsImVtYWlsIjoibWFyZ2Uuc2ltcHNvbkBnbWFpbC5jb21zIiwicGFzc3dvcmQiOiIkMmEkMTAkUmdwbmxyNE5BWS5GSzFFbUZSRUxuLjVtMUFNL3FGVVJjclVpQW1XbThhTmQ2M09QN1VWTHkiLCJpYXQiOjE1MDA4MjIyNjl9.L-jC3gVTDXnJq093PGhAsP-L4GVlAGlfTRyjvkrxut8'`,
+        passHeader : `'Authorization': 'bearer token-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1OWEyZWY2YTE0YzRmNzAwMWNmYmViYWQiLCJuYW1lIjoiQXBwIEFkbWluIiwiZW1haWwiOiJpYW1odW5ncnlhZG1AZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmEkMTAkNXhIZkRuaHZoaVZ6amJ1ZVBPVlVIdUR5ZTlaSTV6Smk5OGNQUFg3a0lzZElJWWZPLmtkVmEiLCJpYXQiOjE1MDM4NTA1MDh9.MiHJj_0_DWxrHP4EuiatePA1MGz0q6Y2ndFCNzLlbxU'`,
     }));
 
     app.use(morgan('dev'));
