@@ -22,7 +22,7 @@ module.exports = {
                     }
                 }
             });
-            
+
             return response.toArray();
         }
     },
@@ -35,6 +35,7 @@ module.exports = {
             const response = await BusinessProducts.insert(newBusinessProduct);
             return Object.assign({id: response.insertedIds[0]}, newBusinessProduct);
         },
+        //user
         createUser: async (root, data, { mongo: { Users } }) => {
             const newUser  = {
                 name     : data.name,
@@ -51,6 +52,11 @@ module.exports = {
                 return { token, user };
             }
         },
+        userExists: async (root, {email}, {mongo: {Users}}) => {
+            const response = await Users.findOne({email});
+            return response !== null;
+        },
+        //business
         createBusiness: async (root, data, { mongo: { Businesses }, user}) => {
             const newBusiness = {
                 name: data.name,
@@ -77,7 +83,7 @@ module.exports = {
         },
         products: async ({_id}, data, {mongo: {BusinessProducts, Products}}) => {
             const response    = await BusinessProducts.find({businessId: _id}).toArray();
-            const productsIds = response.map((p) => p.productId);            
+            const productsIds = response.map((p) => p.productId);
             return await Products.find({_id: {$in: productsIds}}).toArray();
         },
         coordinates: ({location}) => {
