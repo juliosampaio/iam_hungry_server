@@ -47,7 +47,7 @@ const typeDefs = `
         addBusinessProduct(businessId: ID!, productId: ID!): BusinessProduct!
         createBusiness(name: String!, coordinates: String): Business!
         createProduct(name: String!, description: String!): Product!
-        createUser(name: String!, authProvider: AuthProviderSignupData!): User!
+        createUser(name: String!, authProvider: AuthProviderSignupData!): SigninPayload!
         signinUser(email: AUTH_PROVIDER_EMAIL): SigninPayload!
         userExists(email: String!): Boolean!
     }

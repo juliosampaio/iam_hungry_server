@@ -36,14 +36,16 @@ module.exports = {
             return Object.assign({id: response.insertedIds[0]}, newBusinessProduct);
         },
         //user
-        createUser: async (root, data, { mongo: { Users } }) => {
+        createUser: async (root, data, { mongo: { Users }, jwt }) => {
             const newUser  = {
                 name     : data.name,
                 email    : data.authProvider.email.email,
                 password : bcrypt.hashSync(data.authProvider.email.password, 10),//TODO: use async version for this
             };
             const response = await Users.insert(newUser);
-            return Object.assign({ id: response.insertedIds[0] }, newUser);
+            const user     = Object.assign({ id: response.insertedIds[0] }, newUser);
+            const token = jwt.sign(user, config.secret);
+            return { token, user };
         },
         signinUser: async (root, data, { mongo: { Users }, jwt }) => {
             const user = await Users.findOne({ email: data.email.email });
